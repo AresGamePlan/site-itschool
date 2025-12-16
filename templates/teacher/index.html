@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Список групп{% endblock %}
+{% block content %}
+<div class="login-container min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+                <!-- Таблица курсов -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3 text-center">Список групп</h4>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped align-middle text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Название группы</th>
+                                        <th scope="col">Курс</th>
+                                        <th scope="col">Действие</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for group in data["groups"]%}
+                                    
+                                        <tr>
+                                            <td>{{group.id}}</td>
+                                            <td>{{group.name}}</td>
+                                            <td>{{group.course.name if group.course}}</td>
+                                            <td><a class="btn btn-primary" href="{{url_for("teacher.studentList", group_id = group.id)}}">смотреть</a></td>
+                                        </tr>
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <a href="{{url_for("teacher.index")}}" class="btn btn-primary px-4">Создать группу</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

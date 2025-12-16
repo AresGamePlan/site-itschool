@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Сканирование QR{% endblock %}
+{% block content %}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+
+            <div class="card p-4 text-center">
+                <h3 class="mb-4">Сканирование QR-кода</h3>
+
+                <!-- Адаптивный контейнер -->
+                <div id="reader" class="w-100" style="max-width: 350px; margin: 0 auto;"></div>
+
+                <p class="mt-3" id="scan-result" style="font-size: 17px; font-weight: bold;"></p>
+
+                <a href="{{ url_for('admin.index') }}" class="btn btn-secondary mt-3 w-100">
+                    Назад
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- QR Scanner script -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script>
+    const resultBox = document.getElementById("scan-result");
+    const html5QrCode = new Html5Qrcode("reader");
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    function startScanner(cameraId) {
+        html5QrCode.start(
+            cameraId,
+            {
+                fps: 10,
+                qrbox: { width: 250, height: 250 } // Адаптивное окно
+            },
+            onScanSuccess
+        );
+    }
+
+    function onScanSuccess(decodedText, decodedResult) {
+        resultBox.innerText = "QR: " + decodedText;
+
+        // Отправка на сервер
+        fetch("{{ url_for('admin.qrScaner') }}", {
+            method: "POST",
+            headers: {"Content-Type": "application/json","X-CSRFToken": csrfToken},
+            body: JSON.stringify({ qr_data: decodedText })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                // Перенаправляем на страницу списания, передаем id или другие данные
+                window.location.href = data.redirect_url;
+            } else {
+                resultBox.innerText = "Ошибка: " + data.message;
+            }
+        });
+
+        // Останавливаем после успешного чтения
+        html5QrCode.stop();
+    }
+
+    // Получаем список камер
+    Html5Qrcode.getCameras().then(devices => {
+        if (!devices || devices.length === 0) {
+            resultBox.innerText = "Камера не найдена";
+            return;
+        }
+
+        // Ищем основную (заднюю) камеру
+        let backCam = devices.find(d => 
+            d.label.toLowerCase().includes("back") ||
+            d.label.toLowerCase().includes("rear")
+        );
+
+        if (backCam) {
+            startScanner(backCam.id);
+        } else {
+            // fallback → первая доступная камера
+            startScanner(devices[0].id);
+        }
+    });
+</script>
+
+{% endblock %}

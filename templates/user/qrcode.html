@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}QR Код{% endblock %}
+{% block content %}
+
+<div class="min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
+                <div class="login-card p-4 text-center">
+
+                    <h1 class="login-title mb-4">Ваш QR Код</h1>
+
+                    <div class="d-flex justify-content-center mb-4">
+                        <img 
+                            src="data:image/png;base64,{{ data['qr'] }}" 
+                            alt="QR Code"
+                            class="img-fluid"
+                            style="max-width: 250px;"
+                        >
+                    </div>
+
+                    <a href="{{ url_for('user.account') }}" class="btn btn-primary w-100 text-dark">
+                        Назад в кабинет
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Регистрация{% endblock %}
+{% block content %}
+<div class="login-container min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+          <div class="login-card">
+            <h1 class="login-title">Регистрация</h1>
+            <form method="post" action="{{ url_for('auth.register') }}">
+              <div class="mb-3">
+                {{ form.hidden_tag() }}
+                <!-- <label for="loginInput" class="form-label">Логин</label>
+                <input type="text" class="form-control" id="loginInput" placeholder="Введите ваш логин" required> -->
+                {{ form.username.label(class="form-label", for="loginInput") }}
+                {{ form.username(class="form-control", id="loginInput") }}
+              </div>
+              <div class="mb-3">
+                {{ form.fullname.label(class="form-label", for="fullnameInput")}}
+                {{ form.fullname(class="form-control", id="fullnameInput")}}
+              </div>
+              <div class="mb-3">
+                <!-- <label for="passwordInput" class="form-label">Пароль</label>
+                <input type="password" class="form-control" id="passwordInput" placeholder="Введите ваш пароль" required> -->
+                {{ form.password.label(class="form-label", for="passwordInput") }}
+                {{ form.password(class="form-control", id="passwordInput") }}
+              </div>
+              <div class="mb-3">
+                {{ form.confirm_password.label(class="form-label") }}
+                {{ form.confirm_password(class="form-control") }}
+              </div>
+              <div class="mb-3">
+                {% for error in form.username.errors %}
+                    <p style="color: red;">Error</p>
+                {% endfor %}
+              </div>
+              <div class="mb-4 form-check">
+                <input type="checkbox" class="form-check-input" id="rememberCheck">
+                <label class="form-check-label" for="rememberCheck">Запомнить меня</label>
+              </div>
+              <!-- <button type="submit" class="btn btn-primary">Войти</button> -->
+              {{ form.submit(class="btn btn-primary") }}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

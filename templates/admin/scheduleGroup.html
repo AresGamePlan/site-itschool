@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5 min-height">
+    <div class="d-flex justify-content-start mb-3">
+        <a href="{{url_for("admin.groupList")}}" class="btn btn-primary">Назад</a>
+    </div>
+    <h2>Расписание занятий группы {{data["group_name"]}}</h2>
+    <div class="table-responsive">
+        
+        <table class="table table-bordered table-striped align-middle text-center">
+        <thead class="table-dark">
+                <tr>
+                    <th scope="col">ПН</th>
+                    <th scope="col">ВТ</th>
+                    <th scope="col">СР</th>
+                    <th scope="col">ЧТ</th>
+                    <th scope="col">ПТ</th>
+                    <th scope="col">СБ</th>
+                    <th scope="col">ВС</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {%for day in data["schedule"]%}
+                    {%if day == True %}
+                        <td>{{data["text_cell"].replace('\n', '<br>') | safe}}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                    {%endfor%}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

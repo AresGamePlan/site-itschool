@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}записаться{% endblock %}
+{% block content %}
+
+<div class="login-container min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+          <div class="login-card">
+            <h1 class="login-title">Еще не учишься?</h1>
+            <a href="{{url_for("user.sign")}}" class="btn btn-primary text-dark">Записаться</a>
+          </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

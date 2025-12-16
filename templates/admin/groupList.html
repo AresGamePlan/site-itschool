@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Список групп{% endblock %}
+{% block content %}
+<div class="login-container min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-8">
+                <!-- Таблица курсов -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3 text-center">Список групп</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped align-middle text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Название группы</th>
+                                        <th scope="col">Курс</th>
+                                        <th scope="col">Учитель</th>
+                                        <th scope="col">Расписание</th>
+                                        <th scope="col">Действие</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for group in data["group_list"]%}
+                                    <tr>
+                                        <td>{{group.id}}</td>
+                                        <td>{{group.name}}</td>
+                                        <td>{{group.course.name if group.course}}</td>
+                                        <td>{{group.teacher.fullname if group.teacher}}</td>
+                                        <td><a href="{{url_for("admin.scheduleGroup", group_id = group.id)}}" class="btn btn-primary">расписание</a></td>
+                                        <td><a href="{{url_for("admin.createSchedule", group_id = group.id)}}" class="btn btn-primary">установить расписание</a></td>
+                                    </tr>
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-center mt-4">
+                            <a href="{{url_for("admin.createGroup")}}" class="btn btn-primary px-4">Создать группу</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

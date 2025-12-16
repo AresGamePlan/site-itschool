@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Личный кабинет{% endblock %}
+{% block content %}
+
+<div class="login-container min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6">
+                <div class="login-card p-4">
+
+                    <h1 class="login-title text-center mb-4">Личный кабинет</h1>
+                    <form method="post" action="{{url_for("user.edit")}}">
+                        <div class="mb-3">
+                            {{form.hidden_tag()}}
+                            {{form.user_id(type="hidden", value = data["user"].id)}}
+                            {{form.fullname.label(class = "form-label", for = "fullname")}}
+                            {{form.fullname(class = "form-control", id = "fullname", value = data["user"].fullname)}}
+                        </div>
+                        <div class="mb-3">
+                            {{form.login.label(class = "form-label", for = "login")}}
+                            {{form.login(class = "form-control", id = "login", value = data["user"].username)}}
+                        </div>
+                        <div class="mb-3">
+                            {{form.submit(class = "btn btn-primary")}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

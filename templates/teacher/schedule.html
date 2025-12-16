@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Список групп{% endblock %}
+{% block content %}
+<div class="login-container min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                <!-- Таблица курсов -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3 text-center">Список группы</h4>
+
+                        <div class="table-responsive">
+                        <table class="table table-bordered table-striped align-middle text-center">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Группа</th>
+                                <th scope="col">ПН</th>
+                                <th scope="col">ВТ</th>
+                                <th scope="col">СР</th>
+                                <th scope="col">ЧТ</th>
+                                <th scope="col">ПТ</th>
+                                <th scope="col">СБ</th>
+                                <th scope="col">ВС</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for s in data["schedule"] %}
+                            <tr>
+                                <td>{{ s[7] }}</td>
+                                <td>{{ s[0] }}</td>
+                                <td>{{ s[1] }}</td>
+                                <td>{{ s[2] }}</td>
+                                <td>{{ s[3] }}</td>
+                                <td>{{ s[4] }}</td>
+                                <td>{{ s[5] }}</td>
+                                <td>{{ s[6] }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Список курсов{% endblock %}
+{% block content %}
+<div class="login-container min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+                <!-- Таблица курсов -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3 text-center">Список курсов</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped align-middle text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Название курса</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for course in data["course_list"]%}
+                                    <tr>
+                                        <td>{{course.id}}</td>
+                                        <td>{{course.name}}</td>
+                                    </tr>
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+                        </div>
+                        
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <a href="{{url_for("admin.createCourse")}}" class="btn btn-primary px-4">Создать курс</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

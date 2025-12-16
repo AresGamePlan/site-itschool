@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Начисление коинов{% endblock %}
+{% block content %}
+
+<div class="login-container min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+                <!-- Таблица курсов -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-start mb-3">
+                            <a href="{{url_for("admin.groupList")}}" class="btn btn-primary">Назад</a>
+                        </div>
+                        <h4 class="card-title mb-3 text-center">Создание расписания группы {{data["group"].name}}</h4>
+
+                        <form method="post" action="{{url_for("admin.createSchedule")}}">
+                            {{form.hidden_tag()}}
+                            {{form.group_id(type="hidden", value = data["group"].id)}}
+
+                            <div class="mb-3">
+                                {{ form.time_start(class="form-control")}}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.time_finish(class="form-control")}}
+                            </div>
+                            <div class="mb-3">
+                                <table class="table table-bordered table-striped align-middle text-center">
+                                    <thead class="table-dark">
+                                        <th class="scope">ПН</th>
+                                        <th class="scope">ВТ</th>
+                                        <th class="scope">СР</th>
+                                        <th class="scope">ЧТ</th>
+                                        <th class="scope">ПТ</th>
+                                        <th class="scope">СБ</th>
+                                        <th class="scope">ВС</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ form.monday(class="form-check-input")}}</td>
+                                            <td>{{ form.tuesday(class="form-check-input")}}</td>
+                                            <td>{{ form.wednesday(class="form-check-input")}}</td>
+                                            <td>{{ form.thursday(class="form-check-input")}}</td>
+                                            <td>{{ form.friday(class="form-check-input")}}</td>
+                                            <td>{{ form.saturday(class="form-check-input")}}</td>
+                                            <td>{{ form.sunday(class="form-check-input")}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mb-3">
+                                {{form.submit(class="btn btn-primary")}}
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

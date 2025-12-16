@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Список курсов{% endblock %}
+{% block content %}
+<div class="login-container min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-8">
+                <!-- Таблица курсов -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        
+                        <h4 class="card-title mb-3 text-center">Список пользователей</h4>
+                        <div class="mb-3">
+                            <form action="{{url_for("admin.userList")}}" method="get">
+                                
+                                {{ form.name.label(class="form-label", for="nameInput") }}
+                                {{ form.name(class="form-control", id="nameInput")}}
+                                
+                                {{ form.role.label(class="form-label", for="selectInput") }}
+                                {{ form.role(class="form-select mb-3", id="selectInput")}}
+
+                                {{form.submit(class="btn btn-primary")}}
+                            </form>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped align-middle text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Имя</th>
+                                        <th scope="col">Роль</th>
+                                        <th scope="col">Коины</th>
+                                        <th scope="col">Действия</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for user in data["user_list"]%}
+                                    <tr>
+                                        <td>{{user.id}}</td>
+                                        <td>{{user.fullname}}</td>
+                                        <td>{{user.role}}</td>
+                                        <td>{{user.coins}}</td>
+                                        <td>
+                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#confirmChangePassword{{ user.id }}">
+                                                Изменить пароль
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {% for user in data["user_list"] %}
+                        <div class="modal fade" id="confirmChangePassword{{ user.id }}" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Смена пароля</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        Вы уверены, что хотите изменить пароль пользователя <b>{{ user.fullname }}</b>?
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+
+                                        <!-- Переход на страницу смены пароля -->
+                                        <a href="{{ url_for('admin.changePassword', user_id=user.id) }}" class="btn btn-warning">
+                                            Да, изменить
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                        <div class="mb-3 text-center">
+                            <a href="{{url_for("admin.editUserList")}}" class="btn btn-primary">Редактировать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

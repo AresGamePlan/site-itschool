@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Начисление коинов{% endblock %}
+{% block content %}
+
+<div class="login-container min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-8">
+                <div class="login-card p-4">
+
+                    <h1 class="login-title text-center mb-4">Начисление коинов для {{data["student"].user.fullname}}</h1>
+
+                    <form method="post" action="{{ url_for('teacher.addCoins') }}">
+                        {{ form.hidden_tag() }}
+                        {{ form.student_id(type = "hidden", value=data["student"].user.id)}}
+                        {{ form.group_id(type = "hidden", value=data["group_id"])}}
+
+                        <div class="row">
+
+                            <!-- Левая часть (галочки) -->
+                            <div class="col-12 col-md-6 border-end">
+
+                                <h5 class="mb-3">За что начислить</h5>
+
+                                <div class="form-check mb-2">
+                                    {{ form.lesson.label(class = "form-check-label", for = "lesson")}}
+                                    {{ form.lesson(class="form-check-input", id="lesson") }}
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    {{ form.hard_lesson.label(class = "form-check-label", for = "hard_lesson")}}
+                                    {{ form.hard_lesson(class="form-check-input", id="hard_lesson") }}
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    {{ form.help_other.label(class = "form-check-label", for = "help_other")}}
+                                    {{ form.help_other(class="form-check-input", id="help_other") }}
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    {{ form.visit_all_lesson.label(class = "form-check-label", for = "visit_all_lesson")}}
+                                    {{ form.visit_all_lesson(class="form-check-input", id="visit_all_lesson") }}
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    {{ form.idea_for_school.label(class = "form-check-label", for = "idea_for_school")}}
+                                    {{ form.idea_for_school(class="form-check-input", id="idea_for_school") }}
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    {{ form.breach_on_lesson.label(class = "form-check-label", for = "breach_on_lesson")}}
+                                    {{ form.breach_on_lesson(class="form-check-input", id="breach_on_lesson") }}
+                                </div>
+
+                                <div class="mt-4">
+                                    {{ form.submit(class="btn btn-primary w-100") }}
+                                </div>
+                            </div>
+
+                            <!-- Правая часть (комментарий) -->
+                            <div class="col-12 col-md-6">
+
+                                <h5 class="mb-3">Комментарий</h5>
+
+                                <div class="mb-3">
+                                    {{ form.comment.label(class="form-label") }}
+                                    {{ form.comment(class="form-control", rows="6", placeholder="Напишите комментарий...") }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

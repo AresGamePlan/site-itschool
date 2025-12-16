@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}User{% endblock %}
+{% block content %}
+
+<div class="login-container min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+          <div class="login-card">
+            <h1 class="login-title">Создание курса</h1>
+            <form method="post" action="{{url_for("admin.createCourse")}}">
+                <div class="mb-3">
+                    {{ form.hidden_tag() }}
+
+                    {{ form.name.label(class="form-label", for="loginInput") }}
+                    {{ form.name(class="form-control", id="loginInput")}}
+
+                    
+                </div>
+                <div class="mb-3">
+                    {{ form.submit(class="btn btn-primary")}}
+                </div>
+            </form>
+          </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Личный кабинет{% endblock %}
+{% block content %}
+
+<div class="login-container min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6">
+                <div class="login-card p-4">
+
+                    <h1 class="login-title text-center mb-4">Личный кабинет</h1>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <p>ФИО: </p>
+                        <p>{{ data["user"].fullname}}</p>
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <p>Логин: </p>
+                        <p>{{ data["user"].username}}</p>
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <p>Коины: </p>
+                        <p>{{ data["user"].coins}}</p>
+                    </div>
+                    <div class="mb-3 w-100">
+                        <a href="{{url_for("user.qrcode")}}" class="btn btn-primary text-dark">Показать QR</a>
+                    </div>
+                    <div class="mb-3 w-100">
+                        <a href="{{url_for("user.edit")}}" class="btn btn-primary text-dark">Редактировать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

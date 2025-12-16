@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Список курсов{% endblock %}
+{% block content %}
+<div class="login-container min-height d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-8">
+                <!-- Таблица курсов -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-start">
+                            <a href="{{url_for("admin.userList")}}" class="btn btn-primary">Назад</a>
+                        </div>
+                        <h4 class="card-title mb-3 text-center">Список курсов</h4>
+                        <div class="mb-3">
+                            <form action="{{url_for("admin.editUserList")}}" method="get">
+                                
+                                {{ form_filter.name.label(class="form-label", for="nameInput") }}
+                                {{ form_filter.name(class="form-control", id="nameInput")}}
+                                
+                                {{ form_filter.role.label(class="form-label", for="selectInput") }}
+                                {{ form_filter.role(class="form-select fw-bold mb-3", id="selectInput")}}
+
+                                {{form_filter.submit(class="btn btn-primary")}}
+                            </form>
+                        </div>
+                        <div class="container">
+                            <div class="bg-dark text-white py-2 fw-bold rounded-top row">
+                                <div class="col-1">ID</div>
+                                <div class="col">Имя</div>
+                                <div class="col">Роль</div>
+                                <div class="col-4">Действие</div>
+                            </div>
+                            {%for form in data["user_forms"]%}
+                            <form class="watch-form" action="{{url_for("admin.editUserList")}}" method="post">
+                                {{ form.hidden_tag() }}
+                                <div class=" fw-bold row">
+                                    <div class="col-1 border d-flex align-items-center justify-content-center">
+                                        {{form.id.data}}
+                                        {{form.id(class="d-none")}}
+                                    </div>
+                                    <div class="col border p-0 d-flex align-items-center justify-content-center">
+                                        {{form.name(class="form-control", value=form.name.data)}}
+                                    </div>
+                                    <div class="col border p-0 d-flex align-items-center justify-content-center">
+                                        {{form.role(class="form-select border-0 fw-bold")}}
+                                    </div>
+                                    <div class="col-4 border d-flex align-items-center justify-content-center">
+                                        <button type="submit" class="btn btn-primary btn-sm save-btn"
+                                            style="display:none;">Отправить</button>
+                                    </div>
+                                </div>
+                            </form>
+                            {%endfor%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{url_for('static', filename="js/editUserList.js")}}"></script>
+{% endblock %}
