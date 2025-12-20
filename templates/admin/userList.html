@@ -45,6 +45,9 @@
                                             <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#confirmChangePassword{{ user.id }}">
                                                 Изменить пароль
                                             </button>
+                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteUser{{ user.id }}">
+                                                Удалить пользователя
+                                            </button>
                                         </td>
                                     </tr>
                                     {%endfor%}
@@ -72,6 +75,31 @@
                                         <!-- Переход на страницу смены пароля -->
                                         <a href="{{ url_for('admin.changePassword', user_id=user.id) }}" class="btn btn-warning">
                                             Да, изменить
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="confirmDeleteUser{{ user.id }}" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Смена пароля</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        Вы уверены, что хотите удалить пользователя: <b>{{ user.fullname }}</b>?
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+
+                                        <!-- Переход на страницу смены пароля -->
+                                        <a href="{{ url_for('admin.deleteUser', user_id=user.id) }}" class="btn btn-warning">
+                                            Да, удалить
                                         </a>
                                     </div>
 

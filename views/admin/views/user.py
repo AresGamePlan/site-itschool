@@ -12,7 +12,7 @@ class AdminUserListView(AdminView):
         query = User.query
 
         if form.name.data:
-            query = query.filter(User.username.ilike(f"%{form.name.data}%"))
+            query = query.filter(User.fullname.ilike(f"%{form.name.data}%"))
 
         if form.role.data:
             query = query.filter(User.role == form.role.data)
@@ -21,6 +21,17 @@ class AdminUserListView(AdminView):
         kwargs["user_list"] = users
 
         return render_template("admin/userList.html", data = kwargs, form = form)
+    
+class AdminUserDeleteView(AdminView):
+    def get(self, **kwargs):
+        user_id = request.args.get("user_id")
+        user = User.query.get(user_id)
+        if not user:
+            return redirect(url_for("admin.userList"))
+        
+        db.session.delete(user)
+        db.session.commit()
+        return redirect(url_for("admin.userList"))
 
 class AdminChangeUserDataView(AdminView):
 
@@ -30,7 +41,7 @@ class AdminChangeUserDataView(AdminView):
         query = User.query
 
         if form_filter.name.data:
-            query = query.filter(User.username.ilike(f"%{form_filter.name.data}%"))
+            query = query.filter(User.fullname.ilike(f"%{form_filter.name.data}%"))
 
         if form_filter.role.data:
             query = query.filter(User.role == form_filter.role.data)

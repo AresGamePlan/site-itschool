@@ -41,12 +41,13 @@ admin_bp.add_url_rule("/schedule", view_func=AdminScheduleView.as_view("schedule
 admin_bp.add_url_rule("/scheduleGroup", view_func=AdminScheduleGroupView.as_view("scheduleGroup"))
 
 # Для пользователей
-from .views.user import AdminChangeUserDataView, AdminUserListView, AdminChangePasswordView, AdminStudentListView
+from .views.user import AdminChangeUserDataView, AdminUserListView, AdminChangePasswordView, AdminStudentListView, AdminUserDeleteView
 
 admin_bp.add_url_rule("/editUserList", view_func=AdminChangeUserDataView.as_view("editUserList"))
 admin_bp.add_url_rule("/userList", view_func=AdminUserListView.as_view("userList"))
 admin_bp.add_url_rule("/changePassword", view_func=AdminChangePasswordView.as_view("changePassword"))
 admin_bp.add_url_rule("/studentList", view_func=AdminStudentListView.as_view("studentList"))
+admin_bp.add_url_rule("/deleteUser", view_func=AdminUserDeleteView.as_view("deleteUser"))
 
 # Для коинов и системы списания
 from .views.coin import AdminNoCoinsView, AdminQrCodeScanerView, AdminSuccesView, AdminTransactionView
