@@ -28,6 +28,7 @@
                                 <thead class="table-dark">
                                     <tr>
                                         <th scope="col">ID</th>
+                                        <th scope="col">Логин</th>
                                         <th scope="col">Имя</th>
                                         <th scope="col">Роль</th>
                                         <th scope="col">Коины</th>
@@ -38,6 +39,7 @@
                                     {% for user in data["user_list"]%}
                                     <tr>
                                         <td>{{user.id}}</td>
+                                        <td>{{user.username}}</td>
                                         <td>{{user.fullname}}</td>
                                         <td>{{user.role}}</td>
                                         <td>{{user.coins}}</td>
