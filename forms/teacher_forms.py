@@ -8,12 +8,16 @@ class AddStudemtForm(FlaskForm):
 class AddCoinsForm(FlaskForm):
     student_id = IntegerField()
     group_id = IntegerField()
-    lesson = BooleanField("За выполнение задания на уроке")
-    hard_lesson = BooleanField("За выполнения сложного задания")
-    help_other = BooleanField("За помощь другим участникам")
-    visit_all_lesson = BooleanField("За посещение всех занятий в месяце")
-    idea_for_school = BooleanField("Идея для школы")
-    breach_on_lesson = BooleanField("Нарушение дисциплины, не выполнение дз, пропуск")
+    all_lesson = BooleanField("Выполнение всех заданий + активность |+ 200 коинов| (получает только 1 ученик на уроке)")
+    noall_lesson = BooleanField("Выполнение не все задачи запланированные на урок |+ 20 коинов|")
+    activity_on_lesson = BooleanField("За активность на уроке |+ 10 коинов|")
+    help_other = BooleanField("За помощь другим участникам |+ 10 коинов|")
+    visit_all_lesson = BooleanField("За посещение всех занятий в месяце |+ 20 коинов|")
+    idea_for_school = BooleanField("Идея для школы |+ 15 коинов|")
+    discipline_mistake = BooleanField("Нарушение дисциплины |- 10 коинов|")
+    no_completed_homework = BooleanField("Не выполнение дз |- 10 коинов|")
+    lateness = BooleanField("Опоздание |- 10 коинов|")
+    absence = BooleanField("Пропуск занятия |- 10 коинов|")
 
     comment = TextAreaField("Комментарий")
 

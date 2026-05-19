@@ -122,15 +122,19 @@ class TeacherAddCoinsView(MethodView):
         return render_template("teacher/addCoins.html", data = kwargs, form = form)
     
     def post(self, **kwargs):
-        payroll_counts = [100,50,10,20,15,-10]
+        payroll_counts = [200,20,10,10,20,15,-10,-10,-10,-10]
 
         payroll = []
-        payroll.append(request.form.get("lesson"))
-        payroll.append(request.form.get("hard_lesson"))
+        payroll.append(request.form.get("all_lesson"))
+        payroll.append(request.form.get("noall_lesson"))
+        payroll.append(request.form.get("activity_on_lesson"))
         payroll.append(request.form.get("help_other"))
         payroll.append(request.form.get("visit_all_lesson"))
         payroll.append(request.form.get("idea_for_school"))
-        payroll.append(request.form.get("breach_on_lesson"))
+        payroll.append(request.form.get("discipline_mistake"))
+        payroll.append(request.form.get("no_completed_homework"))
+        payroll.append(request.form.get("lateness"))
+        payroll.append(request.form.get("absence"))
 
         payroll_for_student = 0
         user_id = request.form.get("student_id")
