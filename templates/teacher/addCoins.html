@@ -28,6 +28,11 @@
                                 </div>
 
                                 <div class="form-check mb-2">
+                                    {{ form.noall_lesson.label(class = "form-check-label", for = "noall_lesson")}}
+                                    {{ form.noall_lesson(class="form-check-input", id="noall_lesson") }}
+                                </div>
+
+                                <div class="form-check mb-2">
                                     {{ form.activity_on_lesson.label(class = "form-check-label", for = "activity_on_lesson")}}
                                     {{ form.activity_on_lesson(class="form-check-input", id="activity_on_lesson") }}
                                 </div>
